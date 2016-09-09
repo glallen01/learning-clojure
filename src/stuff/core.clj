@@ -42,14 +42,16 @@
 
 (defn bro-fields
   "returns a vector of fields from the brolog header"
-  [brolog]
-  (vec (rest (str/split (apply str (filter
-                                    #(re-matches #"^#fields\t.*" %)
-                                    brolog))
-                        #"\t"))))
+  [file-name]
+  (with-open [in-file (io/reader file-name)] 
+    (let [lines (take 10 (line-seq in-file))]
+      (vec (rest (str/split (apply str (filter
+                                        #(re-matches #"^#fields\t.*" %)
+                                        lines))
+                            #"\t"))))))
 
 ;;; todo - figure out log type based on header
-(defn foo**
+(defn bro-process-log
   "read log and do stuff"
   [file-name]
   (with-open [in-file (io/reader file-name)]
@@ -57,31 +59,8 @@
      (csv/parse-csv in-file
                   :delimiter \tab)
      remove-comments
-     (mappify {:header (bro-fields connlog)})
+     (mappify {:header (bro-fields file-name)})
      doall)))
-
-
-(defn foo 
-  "read log and do stuff"
-  [file-name]
-  (with-open [in-file (io/reader file-name)]
-    (->>
-     (csv/parse-csv in-file
-                  :delimiter \tab)
-     remove-comments
-     (mappify {:header ["ts" "uid" "id_orig_h" "id_orig_p" "id_resp_h" "id_resp_p" "proto" "service" "duration" "orig_bytes" "resp_bytes" "conn_state" "local_orig" "local_resp" "missed_bytes" "history" "orig_pkts" "orig_ip_bytes" "resp_pkts" "resp_ip_bytes" "tunnel_parents"]})
-     doall)))
-
-
-
-(defn foo*
-  "read log and do more stuff"
-  [file-name]
-  (with-open [in-file (io/reader file-name)]
-    (doall
-     (parse-and-process in-file
-                        :delimiter \tab
-                        ))))
   
 (defn -main
   "do stuff"
@@ -91,19 +70,10 @@
   (println "Ten lines from connlog:")
   (println (take 10 connlog) "\n")
 
-  (println "attempting foo...")
-  (doall (map #(println %) (foo "conn.log")))
-;  (with-out-str (clojure.pprint/pprint (foo "conn.log")))
-  (clojure.pprint/print-table (foo "conn.log"))
-  
-  (println "attempting foo*...")
-  (doall (map #(println %) (foo* "conn.log")))
-
-  (println "attempting foo**...")
-  (doall (map #(println %) (foo** "conn.log")))
+  (println "attempting (bro-process-log)...")
+  (doall (map #(println %) (bro-process-log "conn.log")))
+  ;; (clojure.pprint/print-table (bro-process-log "conn.log"))
   ;; (with-out-str (clojure.pprint/pprint (foo "conn.log")))
-;;  (doseq #(-> % str println) (foo** "conn.log"))
-
-
+  ;; (doseq #(-> % str println) (foo** "conn.log"))
 
   )
