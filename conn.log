@@ -1,0 +1,15 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	conn
+#open	2016-09-05-00-36-26
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	local_orig	local_resp	missed_bytes	history	orig_pkts	orig_ip_bytes	resp_pkts	resp_ip_bytes	tunnel_parents
+#types	time	string	addr	port	addr	port	enum	string	interval	count	count	string	bool	bool	count	string	count	count	count	count	set[string]
+1265153646.956656	CTNhWv4n6L3QwumUO3	10.42.42.253	46104	10.42.42.50	80	tcp	-	0.000731	0	0	REJ	-	-	0	Sr	1	60	1	40	(empty)
+1265153647.564250	CnMCVB4RrA2F8HziU1	10.42.42.253	59856	10.42.42.56	80	tcp	-	0.000085	0	0	REJ	-	-	0	Sr	1	60	1	40	(empty)
+1265153647.564252	CJHbCx3YSCeLUt5Jl2	10.42.42.253	40921	10.42.42.25	80	tcp	-	0.000173	0	0	REJ	-	-	0	Sr	1	60	1	40	(empty)
+1265153647.769449	CyRkE84s9xTognaeO4	10.42.42.253	43771	10.42.42.56	554	tcp	-	0.000084	0	0	REJ	-	-	0	Sr	1	60	1	40	(empty)
+1265153647.769636	CkboJn4S8ggpymCBe	10.42.42.253	50305	10.42.42.25	554	tcp	-	0.000223	0	0	REJ	-	-	0	Sr	1	60	1	40	(empty)
+1265153647.769857	Cguu2Y3l5IbNFlzRwj	10.42.42.253	43514	10.42.42.56	389	tcp	-	0.000066	0	0	REJ	-	-	0	Sr	1	60	1	40	(empty)
+1265153647.769446	CzfoRJ3p0SoY4s46A4	10.42.42.253	38232	10.42.42.50	554	tcp	-	0.000669	0	0	REJ	-	-	0	Sr	1	60	1	40	(empty)
