@@ -65,15 +65,15 @@
 (defn -main
   "do stuff"
   [& args]
-  (println "Separator:" (bro-log-get-separator connlog))
-  (println "Fields:" (bro-fields connlog))
-  (println "Ten lines from connlog:")
-  (println (take 10 connlog) "\n")
-
-  (println "attempting (bro-process-log)...")
-  (doall (map #(println %) (bro-process-log "conn.log")))
-  ;; (clojure.pprint/print-table (bro-process-log "conn.log"))
-  ;; (with-out-str (clojure.pprint/pprint (foo "conn.log")))
-  ;; (doseq #(-> % str println) (foo** "conn.log"))
-
-  )
+  (let [ *file-name* "conn.log"]
+    (println "Separator:" (bro-log-get-separator connlog))
+    (println "Fields:" (bro-fields *file-name*))
+    (println "Ten lines from connlog:")
+    (println (take 10 connlog) "\n")
+    
+    (println "attempting (bro-process-log)...")
+    (doall (map #(println %) (bro-process-log *file-name*)))
+    ;; (clojure.pprint/print-table (bro-process-log "conn.log"))
+    ;; (with-out-str (clojure.pprint/pprint (foo "conn.log")))
+    ;; (doseq #(-> % str println) (foo** "conn.log"))
+    ))
