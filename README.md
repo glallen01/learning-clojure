@@ -1,6 +1,4 @@
-# stuff
-
-learning clojure by parsing bro logs
+# learning clojure by parsing bro logs
 
 [src/stuff/core.clj](src/stuff/core.clj) reads a bro-log (in this case a short, sample [conn.log](conn.log)), grabs fields from the headers, and turns it into a clojure map (ie hashtable) of the fields.
 
