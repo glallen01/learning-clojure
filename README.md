@@ -6,10 +6,11 @@ So far, reading the file and grabbing the column names works.
 
 ## TODO:
 
-    - extract the types column and cast the fields
-    - slice out columns a la bro-cut
+    + extract the types column 
+    - cast the fields
+    + slice out columns a la bro-cut
     - threads
-    - read compressed files
+    + read compressed files
     - set loose on a whole dir of brologs as a mulithreaded log-chewing beast
     - build some hunts
 
