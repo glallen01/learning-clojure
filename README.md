@@ -13,6 +13,7 @@ So far, reading the file and grabbing the column names works.
     + read compressed files
     - set loose on a whole dir of brologs as a mulithreaded log-chewing beast
     - build some hunts
+    - use mmap?
 
 ## Usage
 
