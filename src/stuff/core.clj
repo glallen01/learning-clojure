@@ -8,12 +8,14 @@
    ;;[clj-mmap :as mmap]
    [clojure-csv.core :as csv]
    [clojure.tools.cli :refer [parse-opts]]
+   [clojure.tools.trace :as trace]
    )
   (:import (java.util.zip GZIPInputStream)
            (org.apache.commons.compress.compressors
             xz.XZCompressorInputStream
             bzip2.BZip2CompressorInputStream))
   )
+
 
 ;; -------------- functions to handle options and exit
 
@@ -272,16 +274,16 @@
   ;; (clojure.pprint/pprint (frequencies dnsqueries))
 
   (->> files
-;;       (take 3)
+       ;; (take 1)
        ;;(map #(clojure.pprint/pprint %))
        (map #(.getPath %))
-       (map #(bro-process-log %))
+       (pmap #(bro-process-log %))
        ;; (first)
        ;; (map #(:query %))
        (mapcat (partial map #(:query %)))
        (frequencies)
-;;       (vals)
-;;       (reduce +)
+       ;;       (vals)
+       ;;       (reduce +)
        (clojure.pprint/pprint)
        )
   )
@@ -300,11 +302,15 @@
 ;; (def foo (bro-process-log "conn.log"))
 ;; (apply map println foo)
 
+;;; (trace/trace-ns 'stuff.core)
 
 ;;------------
 (defn -main
   "do stuff"
   [& args]
+
+
+  
   (let [*file-name* "conn.log"
         {:keys [options arguments errors summary]} (parse-opts args cli-options)]
     ;
